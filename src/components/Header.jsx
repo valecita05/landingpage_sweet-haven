@@ -1,4 +1,6 @@
-function Header({ cartCount, onCartClick }) {
+import React from "react";
+
+function Header({ cartCount, onCartClick, onUserClick }) {
   return (
     <header className="sh-header">
       <div className="container">
@@ -17,18 +19,25 @@ function Header({ cartCount, onCartClick }) {
           </div>
 
           <ul className="right">
-            <li><a href="#">🔍</a></li>
-            <li><a href="#">👤</a></li>
-            <li><a href="#">♡</a></li>
+            <li><a href="#" aria-label="Buscar">🔍</a></li>
             <li>
               <button
-                className="icon-btn cart-btn"
+                className="icon-btn"
+                onClick={onUserClick}
+                aria-label="Usuario"
+              >
+                👤
+              </button>
+            </li>
+            <li><a href="#" aria-label="Favoritos">♡</a></li>
+            <li>
+              <button
+                className="icon-btn"
                 onClick={onCartClick}
+                aria-label="Carrito"
               >
                 🛒
-                {cartCount > 0 && (
-                  <span className="cart-badge">{cartCount}</span>
-                )}
+                {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
               </button>
             </li>
           </ul>

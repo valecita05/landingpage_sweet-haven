@@ -6,10 +6,12 @@ import WhyChooseUs from "./components/WhyChooseUs";
 import Categories from "./components/Categories";
 import Footer from "./components/Footer";
 import CartModal from "./components/CartModal";
+import AuthModal from "./components/AuthModal"; // 👈 nuevo import
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
   const [showCart, setShowCart] = useState(false);
+  const [showAuth, setShowAuth] = useState(false); // 👈 estado para modal de login
 
   const addToCart = (product) => {
     setCartItems((prev) => {
@@ -39,10 +41,11 @@ function App() {
 
   return (
     <>
-      {/* 🛒 Header con contador y evento para abrir el carrito */}
+      {/* 🧭 Header con eventos de carrito y login */}
       <Header
         cartCount={cartItems.reduce((acc, i) => acc + i.quantity, 0)}
         onCartClick={() => setShowCart(true)}
+        onUserClick={() => setShowAuth(true)} // 👈 aquí abrimos el modal de usuario
       />
 
       <main>
@@ -61,6 +64,12 @@ function App() {
         onClose={() => setShowCart(false)}
         updateQuantity={updateQuantity}
         removeItem={removeItem}
+      />
+
+      {/* 👤 Modal Inicio de Sesión / Crear Cuenta */}
+      <AuthModal
+        show={showAuth}
+        onClose={() => setShowAuth(false)}
       />
     </>
   );
